@@ -3,117 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diário & Leitura Bíblica</title>
-  <!-- Fontes Literárias Clássicas -->
+  <title>Plataforma Devocional & Estudo Bíblico</title>
+  
+  <!-- Tipografia Literária e Clássica -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-main: #181512;
-      --bg-card: #221d18;
-      --bg-input: #1b1713;
-      --border: #382e25;
-      --border-accent: #544436;
-      --text-gold: #d4af37;
-      --text-gold-light: #f3e5ab;
-      --text-main: #e2d8ce;
-      --text-muted: #9c8e80;
-      --accent-red: #8b3a3a;
+      --bg-body: #14110e;
+      --bg-panel: #1e1914;
+      --bg-input: #17130f;
+      --bg-card: #251f19;
+      --border: #3b3026;
+      --border-focus: #7a634a;
+      
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #967923;
+      
+      --text-main: #e8e0d5;
+      --text-muted: #a09283;
+      --text-sub: #786b5e;
+      
       --accent-green: #3a6b4c;
+      --accent-green-light: #82c496;
+      --accent-red: #8b3a3a;
+      --accent-red-light: #e08b8b;
+      
       --font-title: 'Cinzel', serif;
       --font-body: 'Lora', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg-main);
+      background-color: var(--bg-body);
       color: var(--text-main);
       font-family: var(--font-body);
       line-height: 1.7;
-      padding-bottom: 60px;
+      padding-bottom: 80px;
     }
 
     .container {
-      max-width: 860px;
+      max-width: 1040px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    /* Cabeçalho */
+    /* Top Bar / Header */
     header {
-      padding: 40px 0 20px;
-      text-align: center;
-      border-bottom: 2px solid var(--border);
+      padding: 35px 0 25px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .brand h1 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .brand p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* Dashboard Métricas */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
       margin-bottom: 30px;
     }
 
-    header h1 {
-      font-family: var(--font-title);
-      font-size: 2.2rem;
-      color: var(--text-gold);
-      letter-spacing: 2px;
-      margin-bottom: 6px;
+    .metric-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    header p {
+    .metric-title {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       color: var(--text-muted);
-      font-style: italic;
-      font-size: 0.95rem;
+      margin-bottom: 8px;
     }
 
-    /* Navegação / Tabs */
+    .metric-value {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    .metric-sub {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* Navegação por Abas */
     .nav-tabs {
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
+      gap: 8px;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 15px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+      padding-bottom: 2px;
     }
 
     .tab-btn {
       background: none;
-      border: 1px solid var(--border);
+      border: 1px solid transparent;
       color: var(--text-muted);
-      padding: 8px 18px;
-      font-family: var(--font-title);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
+      padding: 10px 18px;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 500;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: 6px 6px 0 0;
+      white-space: nowrap;
       transition: all 0.2s ease;
     }
 
     .tab-btn:hover {
-      border-color: var(--text-gold);
-      color: var(--text-gold-light);
+      color: var(--text-main);
+      background-color: var(--bg-panel);
     }
 
     .tab-btn.active {
-      background-color: var(--bg-card);
-      border-color: var(--text-gold);
-      color: var(--text-gold);
-      box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1);
+      background-color: var(--bg-panel);
+      border-color: var(--border) var(--border) var(--bg-panel);
+      color: var(--gold);
+      font-weight: 600;
     }
 
-    .tab-content {
-      display: none;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Estilos Gerais de Cards */
+    /* Painéis e Forms */
     .card {
-      background-color: var(--bg-card);
+      background-color: var(--bg-panel);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 24px;
@@ -122,111 +189,38 @@
 
     .card-title {
       font-family: var(--font-title);
-      color: var(--text-gold);
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    /* Seção de Progresso da Bíblia */
-    .progress-overview {
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 20px;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    .progress-stats {
-      font-family: var(--font-title);
-      font-size: 1.4rem;
-      color: var(--text-gold);
-      margin-bottom: 8px;
-    }
-
-    .progress-sub {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-    }
-
-    .progress-bar-bg {
-      background-color: var(--bg-main);
-      border: 1px solid var(--border);
-      height: 12px;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      background: linear-gradient(90deg, #8a6d27, var(--text-gold));
-      height: 100%;
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-
-    .testament-title {
-      font-family: var(--font-title);
-      color: var(--text-gold-light);
-      font-size: 1.1rem;
-      margin: 24px 0 14px;
-      padding-bottom: 6px;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
       border-bottom: 1px dashed var(--border);
-    }
-
-    .books-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 10px;
-    }
-
-    .book-item {
-      background-color: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 10px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s ease;
-      font-size: 0.88rem;
     }
 
-    .book-item:hover {
-      border-color: var(--text-gold);
-    }
-
-    .book-item.checked {
-      background-color: #242a20;
-      border-color: var(--accent-green);
-      color: #a3d9b1;
-    }
-
-    .book-item input[type="checkbox"] {
-      accent-color: var(--text-gold);
-      cursor: pointer;
-    }
-
-    /* Formulario Devocional */
     .form-group {
       margin-bottom: 16px;
     }
 
-    label {
-      display: block;
-      font-family: var(--font-title);
-      font-size: 0.8rem;
-      color: var(--text-gold-light);
-      margin-bottom: 6px;
-      letter-spacing: 1px;
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
     }
 
-    input[type="text"], input[type="date"], textarea, select {
+    label {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input[type="text"], input[type="date"], select, textarea {
       width: 100%;
       background-color: var(--bg-input);
       border: 1px solid var(--border);
@@ -235,240 +229,515 @@
       border-radius: 4px;
       font-family: var(--font-body);
       font-size: 0.95rem;
+      transition: border-color 0.2s ease;
     }
 
-    input:focus, textarea:focus, select:focus {
+    input:focus, select:focus, textarea:focus {
       outline: none;
-      border-color: var(--text-gold);
+      border-color: var(--gold);
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 15px;
-    }
-
-    .btn-submit {
-      background-color: var(--text-gold);
+    .btn-primary {
+      background-color: var(--gold);
       color: #120e0b;
       border: none;
       padding: 12px 24px;
-      font-family: var(--font-title);
-      font-weight: 700;
+      font-family: var(--font-sans);
+      font-weight: 600;
       font-size: 0.9rem;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       cursor: pointer;
       border-radius: 4px;
       width: 100%;
       transition: background-color 0.2s ease;
     }
 
-    .btn-submit:hover {
-      background-color: var(--text-gold-light);
+    .btn-primary:hover {
+      background-color: var(--gold-light);
     }
 
-    /* Lista de Registros */
+    /* Estilos Específicos: Leitura Bíblica */
+    .progress-bar-bg {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      height: 14px;
+      border-radius: 7px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .book-item {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: all 0.2s ease;
+    }
+
+    .book-item:hover { border-color: var(--gold); }
+    .book-item.checked {
+      background-color: #1e2c22;
+      border-color: var(--accent-green);
+      color: var(--accent-green-light);
+    }
+
+    .book-item input[type="checkbox"] { accent-color: var(--gold); cursor: pointer; }
+
+    /* Estilos Específicos: Feed de Devocionais e Estudos */
     .entry-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px;
+      margin-bottom: 20px;
       position: relative;
     }
 
     .entry-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: flex-start;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
-      margin-bottom: 14px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
     }
 
-    .entry-passage {
+    .entry-title {
       font-family: var(--font-title);
-      color: var(--text-gold);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      color: var(--gold);
     }
 
     .entry-date {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
       color: var(--text-muted);
-      font-size: 0.85rem;
     }
 
-    .entry-verse {
+    .soap-tag {
+      display: inline-block;
       background-color: var(--bg-input);
-      border-left: 3px solid var(--text-gold);
-      padding: 10px 14px;
-      font-style: italic;
-      margin-bottom: 14px;
-      color: var(--text-gold-light);
-    }
-
-    .entry-section {
-      margin-bottom: 12px;
-    }
-
-    .entry-section-title {
-      font-family: var(--font-title);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      letter-spacing: 1px;
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 10px;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      letter-spacing: 0.5px;
     }
 
-    .btn-delete {
+    .verse-quote {
+      background-color: var(--bg-input);
+      border-left: 3px solid var(--gold);
+      padding: 12px 16px;
+      font-style: italic;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+
+    .entry-body {
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      border-top: 1px dashed var(--border);
+      padding-top: 12px;
+    }
+
+    .btn-danger-sm {
       background: none;
       border: none;
-      color: var(--accent-red);
+      color: var(--accent-red-light);
       font-size: 0.8rem;
       cursor: pointer;
-      margin-top: 10px;
       opacity: 0.7;
     }
+    .btn-danger-sm:hover { opacity: 1; text-decoration: underline; }
 
-    .btn-delete:hover {
-      opacity: 1;
-      text-decoration: underline;
+    /* Estilos: Orações */
+    .prayer-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+      margin-bottom: 15px;
     }
 
+    .prayer-card.answered {
+      border-color: var(--accent-green);
+      background-color: #1a241c;
+    }
+
+    .prayer-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .badge-pending { background-color: #3b2d18; color: var(--gold-light); }
+    .badge-answered { background-color: var(--accent-green); color: #fff; }
+
+    /* Modal / Hidden File Input */
+    #import-file { display: none; }
+
     /* Responsividade */
-    @media (max-width: 600px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      }
+    @media (max-width: 650px) {
+      header { flex-direction: column; align-items: flex-start; }
+      .books-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
     }
   </style>
 </head>
 <body>
 
-  <header class="container">
-    <h1>DIÁRIO & LEITURA</h1>
-    <p>"Lâmpada para os meus pés é tua palavra e luz, para o meu caminho." — Salmos 119:105</p>
-  </header>
+  <div class="container">
+    
+    <!-- Cabeçalho -->
+    <header>
+      <div class="brand">
+        <h1>DIÁRIO & ESTUDO BÍBLICO</h1>
+        <p>"A tua palavra é a verdade." — João 17:17</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-secondary" onclick="exportData()">💾 Backup (JSON)</button>
+        <button class="btn-secondary" onclick="document.getElementById('import-file').click()">📥 Importar</button>
+        <input type="file" id="import-file" accept=".json" onchange="importData(event)">
+      </div>
+    </header>
 
-  <main class="container">
-
-    <!-- Navegação -->
-    <div class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('diario')">Devocionais</button>
-      <button class="tab-btn" onclick="switchTab('progresso')">Livros Lidos (<span id="tab-count">0</span>/66)</button>
+    <!-- Dashboard / Métricas -->
+    <div class="dashboard-grid">
+      <div class="metric-card">
+        <div class="metric-title">Sequência (Streak)</div>
+        <div class="metric-value" id="dash-streak">0 Dias</div>
+        <div class="metric-sub">Consistência de registro</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Leitura da Bíblia</div>
+        <div class="metric-value" id="dash-books">0 / 66</div>
+        <div class="metric-sub" id="dash-books-percent">0% concluído</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Devocionais Salvos</div>
+        <div class="metric-value" id="dash-devotionals">0</div>
+        <div class="metric-sub">Reflexões guardadas</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Orações Atendidas</div>
+        <div class="metric-value" id="dash-prayers">0</div>
+        <div class="metric-sub" id="dash-prayers-sub">0 pedidos ativos</div>
+      </div>
     </div>
 
-    <!-- ABA 1: DEVOCIONAIS -->
+    <!-- Abas Principais -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('diario')">📖 Devocional (SOAP)</button>
+      <button class="tab-btn" onclick="switchTab('progresso')">📚 Leitura dos 66 Livros</button>
+      <button class="tab-btn" onclick="switchTab('oracao')">🙏 Central de Oração</button>
+      <button class="tab-btn" onclick="switchTab('estudos')">✏️ Caderno de Estudos</button>
+    </div>
+
+    <!-- ABA 1: DEVOCIONAL (S.O.A.P) -->
     <div id="tab-diario" class="tab-content active">
-      
-      <!-- Formulário -->
       <div class="card">
-        <div class="card-title">Novo Registro Devocional</div>
+        <div class="card-title">Novo Devocional (Método S.O.A.P)</div>
         <form id="devocional-form">
           <div class="form-row">
             <div class="form-group">
-              <label for="passage">Passagem / Livro</label>
-              <input type="text" id="passage" placeholder="Ex: Romanos 8:1-11" required>
+              <label for="dev-passage">Passagem Bíblica</label>
+              <input type="text" id="dev-passage" placeholder="Ex: Efésios 2:8-10" required>
             </div>
             <div class="form-group">
-              <label for="date">Data</label>
-              <input type="date" id="date" required>
+              <label for="dev-date">Data</label>
+              <input type="date" id="dev-date" required>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="key-verse">Versículo em Destaque</label>
-            <textarea id="key-verse" rows="2" placeholder="Digite o texto do versículo marcante..."></textarea>
+            <label for="dev-scripture">S — Scripture (Texto Bíblico / Versículo)</label>
+            <textarea id="dev-scripture" rows="2" placeholder="Escreva ou copie o versículo principal..." required></textarea>
           </div>
 
           <div class="form-group">
-            <label for="reflection">Reflexão & Aplicação Pessoal</label>
-            <textarea id="reflection" rows="4" placeholder="O que Deus falou com você através dessa leitura?" required></textarea>
+            <label for="dev-observation">O — Observation (O que você observou no texto? Contexto, lições)</label>
+            <textarea id="dev-observation" rows="3" placeholder="O que o texto ensina sobre Deus, o homem ou a fé?"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="prayer">Oração / Pedidos</label>
-            <textarea id="prayer" rows="2" placeholder="Sua oração ou motivos de gratidão de hoje..."></textarea>
+            <label for="dev-application">A — Application (Aplicação Prática para a sua vida hoje)</label>
+            <textarea id="dev-application" rows="3" placeholder="Como você vai aplicar isso na sua rotina hoje?" required></textarea>
           </div>
 
-          <button type="submit" class="btn-submit">GUARDAR DEVOCIONAL</button>
+          <div class="form-group">
+            <label for="dev-prayer">P — Prayer (Oração em resposta à palavra)</label>
+            <textarea id="dev-prayer" rows="2" placeholder="Sua oração baseada no texto lido..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">SALVAR DEVOCIONAL</button>
         </form>
       </div>
 
-      <!-- Feed de Devocionais Registrados -->
-      <div id="entries-container">
-        <!-- Entradas salvas aparecem aqui -->
-      </div>
+      <div id="devocional-list"></div>
     </div>
 
-    <!-- ABA 2: PROGRESSO DOS 66 LIVROS -->
+    <!-- ABA 2: PROGRESSO BÍBLICO (66 LIVROS) -->
     <div id="tab-progresso" class="tab-content">
-      
-      <div class="progress-overview">
-        <div class="progress-stats" id="progress-text">0 de 66 livros lidos</div>
-        <div class="progress-sub" id="progress-sub">Faltam 66 livros para concluir a Bíblia</div>
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progress-fill"></div>
-        </div>
-      </div>
-
       <div class="card">
-        <div class="testament-title">ANTIGO TESTAMENTO (39 Livros)</div>
+        <div class="card-title">
+          <span>Plano de Leitura Bíblica</span>
+          <span id="bible-summary" style="font-size: 0.9rem; color: var(--text-muted);">0 / 66 Lidos</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Marque os livros conforme for concluindo a leitura completa:</p>
+        
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="bible-progress-bar"></div>
+        </div>
+
+        <h3 style="font-family: var(--font-title); color: var(--gold-light); margin: 20px 0 10px; border-bottom: 1px dashed var(--border); padding-bottom: 4px;">ANTIGO TESTAMENTO (39)</h3>
         <div class="books-grid" id="ot-grid"></div>
 
-        <div class="testament-title" style="margin-top: 30px;">NOVO TESTAMENTO (27 Livros)</div>
+        <h3 style="font-family: var(--font-title); color: var(--gold-light); margin: 30px 0 10px; border-bottom: 1px dashed var(--border); padding-bottom: 4px;">NOVO TESTAMENTO (27)</h3>
         <div class="books-grid" id="nt-grid"></div>
       </div>
-
     </div>
 
-  </main>
+    <!-- ABA 3: CENTRAL DE ORAÇÃO -->
+    <div id="tab-oracao" class="tab-content">
+      <div class="card">
+        <div class="card-title">Novo Pedido de Oração</div>
+        <form id="prayer-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prayer-title">Motivo / Título</label>
+              <input type="text" id="prayer-title" placeholder="Ex: Saúde do meu avô / Direção na carreira" required>
+            </div>
+            <div class="form-group">
+              <label for="prayer-category">Categoria</label>
+              <select id="prayer-category">
+                <option value="Família">Família</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Vida Espiritual">Vida Espiritual</option>
+                <option value="Provisão / Estudos">Provisão / Estudos</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="prayer-desc">Detalhes da Oração</label>
+            <textarea id="prayer-desc" rows="2" placeholder="Descreva especificamente pelo que está clamando..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary">REGISTRAR ORAÇÃO</button>
+        </form>
+      </div>
+
+      <div class="card-title" style="margin-top: 30px; border: none;">Seus Clamores & Testemunhos</div>
+      <div id="prayer-list"></div>
+    </div>
+
+    <!-- ABA 4: CADERNO DE ESTUDOS TEMÁTICOS -->
+    <div id="tab-estudos" class="tab-content">
+      <div class="card">
+        <div class="card-title">Novo Estudo Teológico / Temático</div>
+        <form id="study-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="study-title">Tema ou Título do Estudo</label>
+              <input type="text" id="study-title" placeholder="Ex: Estudo sobre a Graça em Paulo / As Parábolas de Jesus" required>
+            </div>
+            <div class="form-group">
+              <label for="study-tags">Tags (separadas por vírgula)</label>
+              <input type="text" id="study-tags" placeholder="Ex: Exegese, Doutrina, Sermão">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="study-content">Anotações e Conteúdo do Estudo</label>
+            <textarea id="study-content" rows="6" placeholder="Registre aqui seus esboços, pesquisas em dicionários bíblicos, comentários teológicos e ideias de mensagens..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">SALVAR ESTUDO</button>
+        </form>
+      </div>
+
+      <div id="study-list"></div>
+    </div>
+
+  </div>
 
   <script>
-    // Lista dos 66 Livros
-    const otBooks = [
-      "Gênesis", "Êxodo", "Levítico", "Números", "Deuteronômio", "Josué", "Juízes", "Rute",
-      "1 Samuel", "2 Samuel", "1 Reis", "2 Reis", "1 Crônicas", "2 Crônicas", "Esdras", "Neemias",
-      "Ester", "Jó", "Salmos", "Provérbios", "Eclesiastes", "Cânticos", "Isaías", "Jeremias",
-      "Lamentações", "Ezequiel", "Daniel", "Oséias", "Joel", "Amós", "Obadias", "Jonas",
-      "Miquéias", "Naum", "Habacuque", "Sofonias", "Ageu", "Zacarias", "Malaquias"
-    ];
+    // --- DADOS BÁSICOS DOS LIVROS ---
+    const otBooks = ["Gênesis", "Êxodo", "Levítico", "Números", "Deuteronômio", "Josué", "Juízes", "Rute", "1 Samuel", "2 Samuel", "1 Reis", "2 Reis", "1 Crônicas", "2 Crônicas", "Esdras", "Neemias", "Ester", "Jó", "Salmos", "Provérbios", "Eclesiastes", "Cânticos", "Isaías", "Jeremias", "Lamentações", "Ezequiel", "Daniel", "Oséias", "Joel", "Amós", "Obadias", "Jonas", "Miquéias", "Naum", "Habacuque", "Sofonias", "Ageu", "Zacarias", "Malaquias"];
+    const ntBooks = ["Mateus", "Marcos", "Lucas", "João", "Atos", "Romanos", "1 Coríntios", "2 Coríntios", "Gálatas", "Efésios", "Filipenses", "Colossenses", "1 Tessalonicenses", "2 Tessalonicenses", "1 Timóteo", "2 Timóteo", "Tito", "Filemom", "Hebreus", "Tiago", "1 Pedro", "2 Pedro", "1 João", "2 João", "3 João", "Judas", "Apocalipse"];
 
-    const ntBooks = [
-      "Mateus", "Marcos", "Lucas", "João", "Atos", "Romanos", "1 Coríntios", "2 Coríntios",
-      "Gálatas", "Efésios", "Filipenses", "Colossenses", "1 Tessalonicenses", "2 Tessalonicenses",
-      "1 Timóteo", "2 Timóteo", "Tito", "Filemom", "Hebreus", "Tiago", "1 Pedro", "2 Pedro",
-      "1 João", "2 João", "3 João", "Judas", "Apocalipse"
-    ];
-
-    // Gerenciamento de Abas
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-      if(tabName === 'diario') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('tab-diario').classList.add('active');
-      } else {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('tab-progresso').classList.add('active');
-      }
+    // --- GERENCIAMENTO DE ESTADO E LOCALSTORAGE ---
+    function getData(key) {
+      return JSON.parse(localStorage.getItem('bible_app_' + key) || '[]');
+    }
+    function setData(key, data) {
+      localStorage.setItem('bible_app_' + key, JSON.stringify(data));
+      updateDashboard();
     }
 
-    // Data Padrão Hoje
-    document.getElementById('date').valueAsDate = new Date();
+    // --- TROCA DE ABAS ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
 
-    // Carregar e Salvar Progresso Bíblico
+    // --- INICIALIZAÇÃO E DASHBOARD ---
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('dev-date').valueAsDate = new Date();
+      loadDevotionals();
+      loadBibleProgress();
+      loadPrayers();
+      loadStudies();
+      updateDashboard();
+    });
+
+    function updateDashboard() {
+      const devotionals = getData('devotionals');
+      const books = getData('read_books');
+      const prayers = getData('prayers');
+
+      // Devocionais salvos
+      document.getElementById('dash-devotionals').innerText = devotionals.length;
+
+      // Livros lidos
+      const bookCount = books.length;
+      const bookPercent = Math.round((bookCount / 66) * 100);
+      document.getElementById('dash-books').innerText = `${bookCount} / 66`;
+      document.getElementById('dash-books-percent').innerText = `${bookPercent}% concluído`;
+
+      // Orações
+      const answered = prayers.filter(p => p.answered).length;
+      const active = prayers.length - answered;
+      document.getElementById('dash-prayers').innerText = answered;
+      document.getElementById('dash-prayers-sub').innerText = `${active} pedido(s) ativo(s)`;
+
+      // Cálculo simples de Streak (dias consecutivos)
+      document.getElementById('dash-streak').innerText = calculateStreak(devotionals) + ' Dias';
+    }
+
+    function calculateStreak(devotionals) {
+      if (!devotionals.length) return 0;
+      const dates = devotionals.map(d => d.date).sort().reverse();
+      const uniqueDates = [...new Set(dates)];
+      
+      let streak = 0;
+      let checkDate = new Date();
+      
+      for (let i = 0; i < uniqueDates.length; i++) {
+        const d = new Date(uniqueDates[i] + 'T00:00:00');
+        const diffDays = Math.floor((checkDate - d) / (1000 * 60 * 60 * 24));
+        
+        if (diffDays <= 1) {
+          streak++;
+          checkDate = d;
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    // --- LÓGICA: DEVOCIONAL (SOAP) ---
+    document.getElementById('devocional-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newDev = {
+        id: Date.now(),
+        passage: document.getElementById('dev-passage').value,
+        date: document.getElementById('dev-date').value,
+        scripture: document.getElementById('dev-scripture').value,
+        observation: document.getElementById('dev-observation').value,
+        application: document.getElementById('dev-application').value,
+        prayer: document.getElementById('dev-prayer').value
+      };
+
+      const list = getData('devotionals');
+      list.unshift(newDev);
+      setData('devotionals', list);
+
+      e.target.reset();
+      document.getElementById('dev-date').valueAsDate = new Date();
+      loadDevotionals();
+    });
+
+    function loadDevotionals() {
+      const list = getData('devotionals');
+      const container = document.getElementById('devocional-list');
+      container.innerHTML = '';
+
+      if (!list.length) {
+        container.innerHTML = `<div style="text-align:center; color: var(--text-muted); padding: 20px;">Nenhum devocional registrado ainda.</div>`;
+        return;
+      }
+
+      list.forEach(dev => {
+        const card = document.createElement('div');
+        card.className = 'entry-card';
+        card.innerHTML = `
+          <div class="entry-header">
+            <div>
+              <span class="soap-tag">Método S.O.A.P</span>
+              <div class="entry-title">${dev.passage}</div>
+            </div>
+            <div class="entry-date">${dev.date.split('-').reverse().join('/')}</div>
+          </div>
+          <div class="verse-quote">"${dev.scripture}"</div>
+          ${dev.observation ? `<div style="margin-bottom: 10px;"><strong>Observação:</strong><br>${dev.observation}</div>` : ''}
+          <div style="margin-bottom: 10px;"><strong>Aplicação Pessoal:</strong><br>${dev.application}</div>
+          ${dev.prayer ? `<div style="margin-bottom: 10px; font-style: italic; color: var(--gold-light);"><strong>Oração:</strong><br>${dev.prayer}</div>` : ''}
+          <div class="action-row">
+            <button class="btn-danger-sm" onclick="deleteItem('devotionals', ${dev.id}, loadDevotionals)">Excluir Devocional</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- LÓGICA: LEITURA DOS 66 LIVROS ---
     function loadBibleProgress() {
-      const readBooks = JSON.parse(localStorage.getItem('my_read_books') || '[]');
+      const readBooks = getData('read_books');
       
       const renderGrid = (books, gridId) => {
         const grid = document.getElementById(gridId);
         grid.innerHTML = '';
-        books.forEach(book => {
-          const isRead = readBooks.includes(book);
+        books.forEach(b => {
+          const isChecked = readBooks.includes(b);
           const item = document.createElement('label');
-          item.className = `book-item ${isRead ? 'checked' : ''}`;
+          item.className = `book-item ${isChecked ? 'checked' : ''}`;
           item.innerHTML = `
-            <input type="checkbox" value="${book}" ${isRead ? 'checked' : ''} onchange="toggleBook('${book}')">
-            <span>${book}</span>
+            <input type="checkbox" value="${b}" ${isChecked ? 'checked' : ''} onchange="toggleBook('${b}')">
+            <span>${b}</span>
           `;
           grid.appendChild(item);
         });
@@ -476,108 +745,189 @@
 
       renderGrid(otBooks, 'ot-grid');
       renderGrid(ntBooks, 'nt-grid');
-      updateProgressStats(readBooks.length);
+
+      const count = readBooks.length;
+      const percent = Math.round((count / 66) * 100);
+      document.getElementById('bible-summary').innerText = `${count} / 66 Lidos (${percent}%)`;
+      document.getElementById('bible-progress-bar').style.width = `${percent}%`;
     }
 
     function toggleBook(bookName) {
-      let readBooks = JSON.parse(localStorage.getItem('my_read_books') || '[]');
+      let readBooks = getData('read_books');
       if (readBooks.includes(bookName)) {
         readBooks = readBooks.filter(b => b !== bookName);
       } else {
         readBooks.push(bookName);
       }
-      localStorage.setItem('my_read_books', JSON.stringify(readBooks));
+      setData('read_books', readBooks);
       loadBibleProgress();
     }
 
-    function updateProgressStats(count) {
-      const percentage = Math.round((count / 66) * 100);
-      const remaining = 66 - count;
-      
-      document.getElementById('progress-text').innerText = `${count} de 66 livros lidos (${percentage}%)`;
-      document.getElementById('progress-sub').innerText = remaining > 0 ? `Faltam ${remaining} livros para concluir a Bíblia` : 'Parabéns! Você concluiu a leitura de toda a Bíblia!';
-      document.getElementById('progress-fill').style.width = `${percentage}%`;
-      document.getElementById('tab-count').innerText = count;
-    }
-
-    // Carregar e Salvar Devocionais
-    const form = document.getElementById('devocional-form');
-    
-    form.addEventListener('submit', (e) => {
+    // --- LÓGICA: CENTRAL DE ORAÇÃO ---
+    document.getElementById('prayer-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      
-      const newEntry = {
+      const newPrayer = {
         id: Date.now(),
-        passage: document.getElementById('passage').value,
-        date: document.getElementById('date').value,
-        verse: document.getElementById('key-verse').value,
-        reflection: document.getElementById('reflection').value,
-        prayer: document.getElementById('prayer').value
+        title: document.getElementById('prayer-title').value,
+        category: document.getElementById('prayer-category').value,
+        desc: document.getElementById('prayer-desc').value,
+        date: new Date().toISOString().split('T')[0],
+        answered: false,
+        testimony: ''
       };
 
-      const entries = JSON.parse(localStorage.getItem('my_devotionals') || '[]');
-      entries.unshift(newEntry);
-      localStorage.setItem('my_devotionals', JSON.stringify(entries));
+      const list = getData('prayers');
+      list.unshift(newPrayer);
+      setData('prayers', list);
 
-      form.reset();
-      document.getElementById('date').valueAsDate = new Date();
-      loadDevotionals();
+      e.target.reset();
+      loadPrayers();
     });
 
-    function loadDevotionals() {
-      const entries = JSON.parse(localStorage.getItem('my_devotionals') || '[]');
-      const container = document.getElementById('entries-container');
+    function loadPrayers() {
+      const list = getData('prayers');
+      const container = document.getElementById('prayer-list');
       container.innerHTML = '';
 
-      if (entries.length === 0) {
-        container.innerHTML = `<div class="card" style="text-align: center; color: var(--text-muted);">Nenhum devocional registrado ainda.</div>`;
+      if (!list.length) {
+        container.innerHTML = `<div style="text-align:center; color: var(--text-muted); padding: 20px;">Nenhum pedido de oração cadastrado.</div>`;
         return;
       }
 
-      entries.forEach(entry => {
+      list.forEach(p => {
         const card = document.createElement('div');
-        card.className = 'card entry-card';
-        
-        // Formatar data
-        const [year, month, day] = entry.date.split('-');
-        const formattedDate = `${day}/${month}/${year}`;
-
+        card.className = `prayer-card ${p.answered ? 'answered' : ''}`;
         card.innerHTML = `
-          <div class="entry-header">
-            <div class="entry-passage">${entry.passage}</div>
-            <div class="entry-date">${formattedDate}</div>
-          </div>
-          ${entry.verse ? `<div class="entry-verse">"${entry.verse}"</div>` : ''}
-          <div class="entry-section">
-            <div class="entry-section-title">Reflexão</div>
-            <div>${entry.reflection.replace(/\n/g, '<br>')}</div>
-          </div>
-          ${entry.prayer ? `
-            <div class="entry-section" style="margin-top: 10px;">
-              <div class="entry-section-title">Oração</div>
-              <div style="color: var(--text-gold-light); font-style: italic;">${entry.prayer.replace(/\n/g, '<br>')}</div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <span class="prayer-badge ${p.answered ? 'badge-answered' : 'badge-pending'}">${p.answered ? '✓ Resposta de Oração' : 'Em Clamor'}</span>
+              <span style="font-size:0.75rem; color:var(--text-muted); margin-left: 8px;">• ${p.category}</span>
+              <h3 style="font-family: var(--font-title); color: var(--gold); margin-top: 4px;">${p.title}</h3>
             </div>
-          ` : ''}
-          <button class="btn-delete" onclick="deleteEntry(${entry.id})">Apagar registro</button>
+            <span style="font-size:0.8rem; color:var(--text-muted);">${p.date.split('-').reverse().join('/')}</span>
+          </div>
+          ${p.desc ? `<p style="margin-top: 8px; font-size: 0.95rem;">${p.desc}</p>` : ''}
+          ${p.answered && p.testimony ? `<div style="margin-top: 10px; background: #131c15; padding: 10px; border-radius: 4px; border-left: 2px solid var(--accent-green); font-style: italic;"><strong>Testemunho:</strong> ${p.testimony}</div>` : ''}
+          
+          <div class="action-row" style="margin-top: 12px;">
+            ${!p.answered ? `<button class="btn-secondary" style="font-size:0.78rem;" onclick="markAnswered(${p.id})">Markar como Atendida ✨</button>` : ''}
+            <button class="btn-danger-sm" onclick="deleteItem('prayers', ${p.id}, loadPrayers)">Excluir</button>
+          </div>
         `;
         container.appendChild(card);
       });
     }
 
-    function deleteEntry(id) {
-      if (confirm('Tem certeza que deseja apagar este devocional?')) {
-        let entries = JSON.parse(localStorage.getItem('my_devotionals') || '[]');
-        entries = entries.filter(e => e.id !== id);
-        localStorage.setItem('my_devotionals', JSON.stringify(entries));
-        loadDevotionals();
+    function markAnswered(id) {
+      const testimony = prompt("Glória a Deus! Quer registrar um breve testemunho de como Deus respondeu esta oração?");
+      const list = getData('prayers');
+      const prayer = list.find(p => p.id === id);
+      if (prayer) {
+        prayer.answered = true;
+        prayer.testimony = testimony || 'Oração atendida pelo Senhor!';
+        setData('prayers', list);
+        loadPrayers();
       }
     }
 
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', () => {
-      loadBibleProgress();
-      loadDevotionals();
+    // --- LÓGICA: CADERNO DE ESTUDOS ---
+    document.getElementById('study-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newStudy = {
+        id: Date.now(),
+        title: document.getElementById('study-title').value,
+        tags: document.getElementById('study-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+        content: document.getElementById('study-content').value,
+        date: new Date().toISOString().split('T')[0]
+      };
+
+      const list = getData('studies');
+      list.unshift(newStudy);
+      setData('studies', list);
+
+      e.target.reset();
+      loadStudies();
     });
+
+    function loadStudies() {
+      const list = getData('studies');
+      const container = document.getElementById('study-list');
+      container.innerHTML = '';
+
+      if (!list.length) {
+        container.innerHTML = `<div style="text-align:center; color: var(--text-muted); padding: 20px;">Nenhum estudo cadastrado.</div>`;
+        return;
+      }
+
+      list.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'entry-card';
+        card.innerHTML = `
+          <div class="entry-header">
+            <div>
+              <div class="entry-title">${s.title}</div>
+              <div style="margin-top: 4px;">
+                ${s.tags.map(t => `<span class="soap-tag">${t}</span>`).join(' ')}
+              </div>
+            </div>
+            <div class="entry-date">${s.date.split('-').reverse().join('/')}</div>
+          </div>
+          <div class="entry-body">${s.content}</div>
+          <div class="action-row">
+            <button class="btn-danger-sm" onclick="deleteItem('studies', ${s.id}, loadStudies)">Excluir Estudo</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- FUNÇÕES AUXILIARES: EXCLUSÃO E BACKUP ---
+    function deleteItem(key, id, reloadFn) {
+      if (confirm('Deseja realmente apagar este registro?')) {
+        let list = getData(key);
+        list = list.filter(item => item.id !== id);
+        setData(key, list);
+        reloadFn();
+      }
+    }
+
+    function exportData() {
+      const fullBackup = {
+        devotionals: getData('devotionals'),
+        read_books: getData('read_books'),
+        prayers: getData('prayers'),
+        studies: getData('studies')
+      };
+
+      const blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `backup_devocional_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+    }
+
+    function importData(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data.devotionals) setData('devotionals', data.devotionals);
+          if (data.read_books) setData('read_books', data.read_books);
+          if (data.prayers) setData('prayers', data.prayers);
+          if (data.studies) setData('studies', data.studies);
+
+          alert('Dados importados com sucesso!');
+          location.reload();
+        } catch (err) {
+          alert('Arquivo JSON inválido.');
+        }
+      };
+      reader.readAsText(file);
+    }
   </script>
 </body>
 </html>

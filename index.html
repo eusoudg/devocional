@@ -12,28 +12,28 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#f5f7fa',
-              100: '#eaeef4',
-              200: '#d0dbe7',
-              300: '#a7bdd2',
-              400: '#779aba',
-              500: '#547da3',
-              600: '#406387',
-              700: '#34506f',
-              800: '#2d435c',
-              900: '#283a4f',
-              950: '#0f172a',
+            journal: {
+              50: '#fdfbf7',
+              100: '#f7f2e7',
+              200: '#eddcc4',
+              300: '#e0c09b',
+              400: '#d1a070',
+              500: '#c2834d',
+              600: '#a8653b',
+              700: '#8c4e33',
+              800: '#73402e',
+              900: '#5e3629',
+              950: '#1c1512',
             },
-            amber: {
-              400: '#fbbf24',
-              500: '#f59e0b',
-              900: '#78350f',
+            parchment: {
+              800: '#261e1b',
+              900: '#1b1412',
+              950: '#120d0b',
             }
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
           }
         }
       }
@@ -42,276 +42,376 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Custom Scrollbar for Dark Theme */
+    /* Estilo com toque editorial e caloroso */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #0f172a;
+      background: #120d0b;
     }
     ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
+      background: #382a24;
+      border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #475569;
+      background: #543f36;
     }
-    .glass-panel {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .journal-card {
+      background: #1b1412;
+      border: 1px solid #332722;
+    }
+    .journal-card:hover {
+      border-color: #4a3831;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-200 font-sans min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-parchment-950 text-stone-300 font-sans min-h-screen flex flex-col selection:bg-amber-800/40 selection:text-amber-200">
 
-  <!-- Top Header Navigation -->
-  <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <!-- Cabeçalho Principal -->
+  <header class="border-b border-stone-800/80 bg-parchment-900/90 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center shadow-lg shadow-amber-500/10 text-slate-950 font-bold">
-          <i data-lucide="book-open" class="w-5 h-5"></i>
+        <div class="w-10 h-10 rounded-lg bg-stone-800 border border-stone-700 flex items-center justify-center text-amber-500 shadow-sm">
+          <i data-lucide="book-open-check" class="w-5 h-5"></i>
         </div>
         <div>
-          <h1 class="font-serif text-xl sm:text-2xl font-bold text-slate-100 tracking-wide">Meu Diário Devocional</h1>
-          <p class="text-xs text-slate-400 font-medium">Reflexão, Oração e Crescimento Espiritual</p>
+          <h1 class="font-serif text-xl sm:text-2xl font-medium text-stone-100 tracking-tight">Diário Devocional</h1>
+          <p class="text-xs text-stone-400">Reflexão, Leitura & Vida de Oração</p>
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
-      <nav class="flex gap-1 bg-slate-950/60 p-1.5 rounded-xl border border-slate-800/80">
-        <button id="nav-devotionals" onclick="switchTab('devotionals')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 text-amber-400 shadow-sm">
-          <i data-lucide="book-marked" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Devocionais</span>
+      <!-- Navegação de Abas -->
+      <nav class="flex gap-1 bg-parchment-950 p-1 rounded-lg border border-stone-800">
+        <button id="nav-devotionals" onclick="switchTab('devotionals')" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all flex items-center gap-2 bg-stone-800 text-amber-400">
+          <i data-lucide="feather" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Diário</span>
         </button>
-        <button id="nav-verses" onclick="switchTab('verses')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+        <button id="nav-tracker" onclick="switchTab('tracker')" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-stone-400 hover:text-stone-200 hover:bg-stone-800/50">
+          <i data-lucide="library" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Plano de Leitura</span>
+          <span id="tracker-progress-badge" class="bg-stone-800 text-amber-400 text-xs px-2 py-0.5 rounded-full font-mono">0/66</span>
+        </button>
+        <button id="nav-verses" onclick="switchTab('verses')" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-stone-400 hover:text-stone-200 hover:bg-stone-800/50">
           <i data-lucide="bookmark" class="w-4 h-4"></i>
           <span class="hidden sm:inline">Promessas</span>
-          <span id="fav-count-badge" class="bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded-full font-semibold">0</span>
+          <span id="fav-count-badge" class="bg-stone-800 text-amber-400 text-xs px-2 py-0.5 rounded-full font-mono">0</span>
         </button>
       </nav>
     </div>
   </header>
 
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
 
-    <!-- Daily Verse Inspiration Header -->
-    <section class="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-2xl border-amber-500/20">
-      <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="relative z-10 space-y-3 max-w-3xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold tracking-wider uppercase">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Versículo Inspirador
-        </div>
-        <blockquote class="font-serif text-lg sm:text-xl md:text-2xl text-slate-100 italic leading-relaxed">
+    <!-- Citação Inspiradora -->
+    <section class="journal-card rounded-xl p-6 relative overflow-hidden">
+      <div class="relative z-10 space-y-2 max-w-3xl">
+        <span class="text-xs font-semibold uppercase tracking-widest text-amber-600/90">Palavra do Dia</span>
+        <blockquote class="font-serif text-lg sm:text-xl text-stone-200 italic leading-relaxed">
           "Lâmpada para os meus pés é tua palavra e luz para o meu caminho."
         </blockquote>
-        <p class="text-sm font-semibold text-amber-400/90 tracking-wide">— Salmos 119:105</p>
+        <p class="text-xs font-medium text-stone-400 tracking-wide">— Salmos 119:105</p>
       </div>
     </section>
 
-    <!-- TAB 1: DEVOCIONAIS -->
-    <div id="tab-content-devotionals" class="space-y-8">
+    <!-- ABA 1: DIÁRIO DEVOCIONAL -->
+    <div id="tab-content-devotionals" class="space-y-6">
       
-      <!-- Stats & Quick Action Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+      <!-- Resumo e Novo Registro -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="journal-card rounded-lg p-4 flex items-center justify-between">
           <div>
-            <p class="text-xs text-slate-400 font-medium">Total de Registros</p>
-            <p id="stat-total" class="text-2xl font-bold text-slate-100 mt-1">0</p>
+            <p class="text-xs text-stone-400">Total de Registros</p>
+            <p id="stat-total" class="text-2xl font-serif font-bold text-stone-100 mt-1">0</p>
           </div>
-          <div class="p-3 bg-slate-800/80 rounded-lg text-slate-400">
-            <i data-lucide="file-text" class="w-5 h-5"></i>
-          </div>
+          <i data-lucide="notebook" class="w-5 h-5 text-stone-500"></i>
         </div>
 
-        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+        <div class="journal-card rounded-lg p-4 flex items-center justify-between">
           <div>
-            <p class="text-xs text-slate-400 font-medium">Versículos Salvos</p>
-            <p id="stat-verses" class="text-2xl font-bold text-slate-100 mt-1">0</p>
+            <p class="text-xs text-stone-400">Livros Concluídos</p>
+            <p id="stat-books-read" class="text-2xl font-serif font-bold text-amber-500 mt-1">0 / 66</p>
           </div>
-          <div class="p-3 bg-slate-800/80 rounded-lg text-amber-400">
-            <i data-lucide="star" class="w-5 h-5"></i>
-          </div>
+          <i data-lucide="book-open" class="w-5 h-5 text-stone-500"></i>
         </div>
 
-        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+        <div class="journal-card rounded-lg p-4 flex items-center justify-between">
           <div>
-            <p class="text-xs text-slate-400 font-medium">Este Mês</p>
-            <p id="stat-month" class="text-2xl font-bold text-slate-100 mt-1">0</p>
+            <p class="text-xs text-stone-400">Este Mês</p>
+            <p id="stat-month" class="text-2xl font-serif font-bold text-stone-100 mt-1">0</p>
           </div>
-          <div class="p-3 bg-slate-800/80 rounded-lg text-emerald-400">
-            <i data-lucide="calendar" class="w-5 h-5"></i>
-          </div>
+          <i data-lucide="calendar" class="w-5 h-5 text-stone-500"></i>
         </div>
 
-        <button onclick="toggleFormModal(true)" class="bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold rounded-xl p-4 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10 transition-all transform hover:-translate-y-0.5">
-          <i data-lucide="plus-circle" class="w-5 h-5"></i>
-          <span>Novo Registro</span>
+        <button onclick="toggleFormModal(true)" class="bg-amber-700 hover:bg-amber-600 text-amber-50 font-medium rounded-lg p-4 flex items-center justify-center gap-2 shadow-sm transition-colors">
+          <i data-lucide="plus" class="w-5 h-5"></i>
+          <span>Novo Devocional</span>
         </button>
       </div>
 
-      <!-- Search & Tag Filter Bar -->
-      <div class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-slate-900/40 p-4 rounded-xl border border-slate-800">
-        <div class="relative w-full sm:w-80">
-          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-          <input type="text" id="search-input" oninput="renderDevotionals()" placeholder="Buscar por passagem, texto ou tag..." class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500/50 transition-colors">
+      <!-- Barra de Filtro e Busca -->
+      <div class="flex flex-col sm:flex-row gap-3 items-center justify-between bg-parchment-900 p-3 rounded-lg border border-stone-800">
+        <div class="relative w-full sm:w-72">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-500"></i>
+          <input type="text" id="search-input" oninput="renderDevotionals()" placeholder="Pesquisar registros..." class="w-full bg-parchment-950 border border-stone-800 rounded-md pl-9 pr-3 py-1.5 text-xs sm:text-sm text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600">
         </div>
 
-        <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0" id="tag-filter-list">
-          <button onclick="setFilterTag('all')" class="tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950 shadow-sm" data-tag="all">
-            Todos
-          </button>
-          <button onclick="setFilterTag('Fé')" class="tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700" data-tag="Fé">Fé</button>
-          <button onclick="setFilterTag('Gratidão')" class="tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700" data-tag="Gratidão">Gratidão</button>
-          <button onclick="setFilterTag('Sabedoria')" class="tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700" data-tag="Sabedoria">Sabedoria</button>
-          <button onclick="setFilterTag('Oração')" class="tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700" data-tag="Oração">Oração</button>
-          <button onclick="setFilterTag('Esperança')" class="tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700" data-tag="Esperança">Esperança</button>
+        <div class="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0" id="tag-filter-list">
+          <button onclick="setFilterTag('all')" class="tag-filter-btn px-2.5 py-1 rounded text-xs bg-amber-800/60 text-amber-200 border border-amber-700/50" data-tag="all">Todos</button>
+          <button onclick="setFilterTag('Fé')" class="tag-filter-btn px-2.5 py-1 rounded text-xs bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800" data-tag="Fé">Fé</button>
+          <button onclick="setFilterTag('Gratidão')" class="tag-filter-btn px-2.5 py-1 rounded text-xs bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800" data-tag="Gratidão">Gratidão</button>
+          <button onclick="setFilterTag('Sabedoria')" class="tag-filter-btn px-2.5 py-1 rounded text-xs bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800" data-tag="Sabedoria">Sabedoria</button>
+          <button onclick="setFilterTag('Oração')" class="tag-filter-btn px-2.5 py-1 rounded text-xs bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800" data-tag="Oração">Oração</button>
         </div>
       </div>
 
-      <!-- Devotionals Feed List -->
+      <!-- Feed de Devocionais -->
       <div id="devotionals-feed" class="space-y-4">
-        <!-- Rendered via JS -->
+        <!-- JS irá renderizar -->
       </div>
     </div>
 
-    <!-- TAB 2: VERSÍCULOS FAVORITOS / PROMESSAS -->
-    <div id="tab-content-verses" class="hidden space-y-6">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
-        <div>
-          <h2 class="font-serif text-xl font-bold text-slate-100">Promessas & Versículos Especiais</h2>
-          <p class="text-sm text-slate-400">Guarde suas passagens bíblicas favoritas para consultar rapidamente nos momentos que precisar.</p>
+    <!-- ABA 2: LEITURA DA BÍBLIA (NOVO FUNCIONALIDADE) -->
+    <div id="tab-content-tracker" class="hidden space-y-6">
+      
+      <!-- Progresso Geral -->
+      <div class="journal-card rounded-xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-xl font-semibold text-stone-100">Progresso da Leitura Bíblica</h2>
+            <p class="text-xs text-stone-400 mt-1">Marque os livros que já concluiu para acompanhar a sua jornada pelos 66 livros.</p>
+          </div>
+          <div class="text-left sm:text-right">
+            <span id="tracker-summary-text" class="text-2xl font-serif font-bold text-amber-500">0 em 66</span>
+            <p id="tracker-remaining-text" class="text-xs text-stone-400">Faltam 66 livros</p>
+          </div>
         </div>
-        <button onclick="toggleVerseModal(true)" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 shadow-lg shadow-amber-500/10 transition-all">
+
+        <!-- Barra de Progresso Visual -->
+        <div class="w-full bg-parchment-950 h-3 rounded-full overflow-hidden border border-stone-800">
+          <div id="tracker-progress-bar" class="bg-amber-700 h-full w-0 transition-all duration-300"></div>
+        </div>
+      </div>
+
+      <!-- Abas Antigo / Novo Testamento -->
+      <div class="flex border-b border-stone-800 gap-4">
+        <button id="btn-ot" onclick="switchTestament('OT')" class="pb-2 text-sm font-medium border-b-2 border-amber-600 text-amber-400">
+          Antigo Testamento (<span id="ot-count">0/39</span>)
+        </button>
+        <button id="btn-nt" onclick="switchTestament('NT')" class="pb-2 text-sm font-medium border-b-2 border-transparent text-stone-400 hover:text-stone-200">
+          Novo Testamento (<span id="nt-count">0/27</span>)
+        </button>
+      </div>
+
+      <!-- Lista de Livros (Grid) -->
+      <div id="bible-books-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
+        <!-- Renderizado via JavaScript -->
+      </div>
+    </div>
+
+    <!-- ABA 3: VERSÍCULOS FAVORITOS -->
+    <div id="tab-content-verses" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 journal-card p-6 rounded-xl">
+        <div>
+          <h2 class="font-serif text-xl font-semibold text-stone-100">Promessas & Passagens Marcantes</h2>
+          <p class="text-xs text-stone-400 mt-1">Guarde versículos e promessas para consultar sempre que precisar de encorajamento.</p>
+        </div>
+        <button onclick="toggleVerseModal(true)" class="bg-amber-700 hover:bg-amber-600 text-amber-50 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center gap-2 transition-colors">
           <i data-lucide="plus" class="w-4 h-4"></i>
-          <span>Adicionar Versículo</span>
+          <span>Guardar Versículo</span>
         </button>
       </div>
 
       <div id="verses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Rendered via JS -->
+        <!-- JS irá renderizar -->
       </div>
     </div>
 
   </main>
 
-  <!-- MODAL 1: FORMULÁRIO DE DEVOCIONAL -->
-  <div id="modal-form" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
-    <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-      
-      <!-- Modal Header -->
-      <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
-        <div class="flex items-center gap-2 text-amber-400 font-serif font-bold text-xl">
-          <i data-lucide="edit-3" class="w-5 h-5"></i>
-          <span id="modal-title">Novo Registro Devocional</span>
-        </div>
-        <button onclick="toggleFormModal(false)" class="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition-colors">
+  <!-- MODAL DE DEVOCIONAL -->
+  <div id="modal-form" class="fixed inset-0 bg-parchment-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-parchment-900 border border-stone-800 w-full max-w-xl rounded-xl shadow-xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="p-5 border-b border-stone-800 flex justify-between items-center">
+        <h3 id="modal-title" class="font-serif font-medium text-lg text-stone-100 flex items-center gap-2">
+          <i data-lucide="feather" class="w-4 h-4 text-amber-500"></i> Novo Registro
+        </h3>
+        <button onclick="toggleFormModal(false)" class="text-stone-400 hover:text-stone-200">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <!-- Modal Form Body -->
-      <form id="devotional-form" onsubmit="handleFormSubmit(event)" class="p-6 space-y-5 overflow-y-auto flex-1">
+      <form id="devotional-form" onsubmit="handleFormSubmit(event)" class="p-5 space-y-4 overflow-y-auto flex-1 text-xs sm:text-sm">
         <input type="hidden" id="edit-id" value="">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">DATA</label>
-            <input type="date" id="field-date" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500/50">
+            <label class="block font-medium text-stone-400 mb-1">DATA</label>
+            <input type="date" id="field-date" required class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 focus:outline-none focus:border-stone-600">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">PASSAGEM / LIVRO E CAPÍTULO</label>
-            <input type="text" id="field-passage" required placeholder="ex: João 15:1-8" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50">
+            <label class="block font-medium text-stone-400 mb-1">PASSAGEM BÍBLICA</label>
+            <input type="text" id="field-passage" required placeholder="Ex: Salmos 23:1-6" class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600">
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">VERSÍCULO CHAVE / DESTACADO</label>
-          <textarea id="field-verse" rows="2" placeholder="Digite o trecho do versículo que mais te marcou..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50"></textarea>
+          <label class="block font-medium text-stone-400 mb-1">VERSÍCULO CHAVE</label>
+          <textarea id="field-verse" rows="2" placeholder="O trecho que mais te impactou..." class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">O QUE APRENDI / O QUE DEUS FALOU COMIGO</label>
-          <textarea id="field-learned" rows="3" required placeholder="Escreva suas reflexões e o entendimento do texto..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50"></textarea>
+          <label class="block font-medium text-stone-400 mb-1">O QUE APRENDI / REFLEXÃO</label>
+          <textarea id="field-learned" rows="3" required placeholder="O que Deus falou com você através do texto?" class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">APLICAÇÃO PRÁTICA NA MINHA VIDA</label>
-          <textarea id="field-application" rows="2" placeholder="Como colocar esse aprendizado em prática hoje?" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50"></textarea>
+          <label class="block font-medium text-stone-400 mb-1">APLICAÇÃO PRÁTICA</label>
+          <textarea id="field-application" rows="2" placeholder="Como praticar essa verdade hoje?" class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">MOTIVOS & PEDIDOS DE ORAÇÃO</label>
-          <textarea id="field-prayer" rows="2" placeholder="Intercessões, agradecimentos ou pedidos de oração..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50"></textarea>
+          <label class="block font-medium text-stone-400 mb-1">ORAÇÃO / MOTIVOS</label>
+          <textarea id="field-prayer" rows="2" placeholder="Agradecimentos ou pedidos de oração..." class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">TAGS / CATEGORIAS (separadas por vírgula)</label>
-          <input type="text" id="field-tags" placeholder="Fé, Gratidão, Sabedoria, Oração" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50">
+          <label class="block font-medium text-stone-400 mb-1">TAGS (separadas por vírgula)</label>
+          <input type="text" id="field-tags" placeholder="Fé, Gratidão, Paz" class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 placeholder-stone-600 focus:outline-none focus:border-stone-600">
         </div>
 
-        <!-- Modal Footer Actions -->
-        <div class="pt-4 border-t border-slate-800 flex justify-end gap-3">
-          <button type="button" onclick="toggleFormModal(false)" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors">Cancelar</button>
-          <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-sm transition-all shadow-lg shadow-amber-500/10">Salvar Registro</button>
+        <div class="pt-3 border-t border-stone-800 flex justify-end gap-2">
+          <button type="button" onclick="toggleFormModal(false)" class="px-3 py-1.5 text-stone-400 hover:text-stone-200">Cancelar</button>
+          <button type="submit" class="bg-amber-700 hover:bg-amber-600 text-amber-50 font-medium px-4 py-1.5 rounded-md">Salvar</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 2: ADD FAVORITE VERSE -->
-  <div id="modal-verse" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
-    <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl shadow-2xl p-6 space-y-5">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-4">
-        <h3 class="font-serif font-bold text-lg text-slate-100 flex items-center gap-2">
-          <i data-lucide="bookmark" class="w-5 h-5 text-amber-400"></i> Adicionar Promessa / Versículo
+  <!-- MODAL DE VERSÍCULOS -->
+  <div id="modal-verse" class="fixed inset-0 bg-parchment-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-parchment-900 border border-stone-800 w-full max-w-md rounded-xl p-5 space-y-4 text-xs sm:text-sm">
+      <div class="flex justify-between items-center border-b border-stone-800 pb-3">
+        <h3 class="font-serif font-medium text-stone-100 flex items-center gap-2">
+          <i data-lucide="bookmark" class="w-4 h-4 text-amber-500"></i> Salvar Versículo
         </h3>
-        <button onclick="toggleVerseModal(false)" class="text-slate-400 hover:text-slate-200 p-1 rounded-lg">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button onclick="toggleVerseModal(false)" class="text-stone-400 hover:text-stone-200">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <form onsubmit="handleVerseSubmit(event)" class="space-y-4">
+      <form onsubmit="handleVerseSubmit(event)" class="space-y-3">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">REFERÊNCIA BÍBLICA</label>
-          <input type="text" id="verse-ref" required placeholder="ex: Filipenses 4:13" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50">
+          <label class="block font-medium text-stone-400 mb-1">REFERÊNCIA</label>
+          <input type="text" id="verse-ref" required placeholder="Ex: Filipenses 4:13" class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 focus:outline-none focus:border-stone-600">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">TEXTO DO VERSÍCULO</label>
-          <textarea id="verse-text" rows="3" required placeholder="Tudo posso naquele que me fortalece." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50"></textarea>
+          <label class="block font-medium text-stone-400 mb-1">TEXTO</label>
+          <textarea id="verse-text" rows="3" required placeholder="Digite a passagem..." class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 focus:outline-none focus:border-stone-600"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">TEMA / TAG</label>
-          <input type="text" id="verse-tag" placeholder="ex: Força, Esperança" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/50">
+          <label class="block font-medium text-stone-400 mb-1">TEMA</label>
+          <input type="text" id="verse-tag" placeholder="Ex: Força, Paz" class="w-full bg-parchment-950 border border-stone-800 rounded-md px-3 py-1.5 text-stone-200 focus:outline-none focus:border-stone-600">
         </div>
 
-        <div class="pt-3 border-t border-slate-800 flex justify-end gap-3">
-          <button type="button" onclick="toggleVerseModal(false)" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800">Cancelar</button>
-          <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-sm shadow-lg shadow-amber-500/10">Guardar Versículo</button>
+        <div class="pt-3 border-t border-stone-800 flex justify-end gap-2">
+          <button type="button" onclick="toggleVerseModal(false)" class="px-3 py-1.5 text-stone-400 hover:text-stone-200">Cancelar</button>
+          <button type="submit" class="bg-amber-700 hover:bg-amber-600 text-amber-50 font-medium px-4 py-1.5 rounded-md">Guardar</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- JavaScript Logic -->
   <script>
-    // Initial State Data
+    // Lista Completa dos 66 Livros da Bíblia
+    const BIBLE_BOOKS = [
+      // Antigo Testamento (39)
+      { id: 'gen', name: 'Gênesis', testament: 'OT', chapters: 50 },
+      { id: 'exo', name: 'Êxodo', testament: 'OT', chapters: 40 },
+      { id: 'lev', name: 'Levítico', testament: 'OT', chapters: 27 },
+      { id: 'num', name: 'Números', testament: 'OT', chapters: 36 },
+      { id: 'deu', name: 'Deuteronômio', testament: 'OT', chapters: 34 },
+      { id: 'jos', name: 'Josué', testament: 'OT', chapters: 24 },
+      { id: 'jdg', name: 'Juízes', testament: 'OT', chapters: 21 },
+      { id: 'rut', name: 'Rute', testament: 'OT', chapters: 4 },
+      { id: '1sa', name: '1 Samuel', testament: 'OT', chapters: 31 },
+      { id: '2sa', name: '2 Samuel', testament: 'OT', chapters: 24 },
+      { id: '1ki', name: '1 Reis', testament: 'OT', chapters: 22 },
+      { id: '2ki', name: '2 Reis', testament: 'OT', chapters: 25 },
+      { id: '1ch', name: '1 Crônicas', testament: 'OT', chapters: 29 },
+      { id: '2ch', name: '2 Crônicas', testament: 'OT', chapters: 36 },
+      { id: 'ezr', name: 'Esdras', testament: 'OT', chapters: 10 },
+      { id: 'neh', name: 'Neemias', testament: 'OT', chapters: 13 },
+      { id: 'est', name: 'Ester', testament: 'OT', chapters: 10 },
+      { id: 'job', name: 'Jó', testament: 'OT', chapters: 42 },
+      { id: 'psa', name: 'Salmos', testament: 'OT', chapters: 150 },
+      { id: 'pro', name: 'Provérbios', testament: 'OT', chapters: 31 },
+      { id: 'ecc', name: 'Eclesiastes', testament: 'OT', chapters: 12 },
+      { id: 'sng', name: 'Cânticos', testament: 'OT', chapters: 8 },
+      { id: 'isa', name: 'Isaías', testament: 'OT', chapters: 66 },
+      { id: 'jer', name: 'Jeremias', testament: 'OT', chapters: 52 },
+      { id: 'lam', name: 'Lamentações', testament: 'OT', chapters: 5 },
+      { id: 'ezk', name: 'Ezequiel', testament: 'OT', chapters: 48 },
+      { id: 'dan', name: 'Daniel', testament: 'OT', chapters: 12 },
+      { id: 'hos', name: 'Oseias', testament: 'OT', chapters: 14 },
+      { id: 'jol', name: 'Joel', testament: 'OT', chapters: 3 },
+      { id: 'amo', name: 'Amós', testament: 'OT', chapters: 9 },
+      { id: 'oba', name: 'Obadias', testament: 'OT', chapters: 1 },
+      { id: 'jon', name: 'Jonas', testament: 'OT', chapters: 4 },
+      { id: 'mic', name: 'Miqueias', testament: 'OT', chapters: 7 },
+      { id: 'nam', name: 'Naum', testament: 'OT', chapters: 3 },
+      { id: 'hab', name: 'Habacuque', testament: 'OT', chapters: 3 },
+      { id: 'zep', name: 'Sofonias', testament: 'OT', chapters: 3 },
+      { id: 'hag', name: 'Ageu', testament: 'OT', chapters: 2 },
+      { id: 'zec', name: 'Zacarias', testament: 'OT', chapters: 14 },
+      { id: 'mal', name: 'Malaquias', testament: 'OT', chapters: 4 },
+
+      // Novo Testamento (27)
+      { id: 'mat', name: 'Mateus', testament: 'NT', chapters: 28 },
+      { id: 'mar', name: 'Marcos', testament: 'NT', chapters: 16 },
+      { id: 'luk', name: 'Lucas', testament: 'NT', chapters: 24 },
+      { id: 'joh', name: 'João', testament: 'NT', chapters: 21 },
+      { id: 'act', name: 'Atos', testament: 'NT', chapters: 28 },
+      { id: 'rom', name: 'Romanos', testament: 'NT', chapters: 16 },
+      { id: '1co', name: '1 Coríntios', testament: 'NT', chapters: 16 },
+      { id: '2co', name: '2 Coríntios', testament: 'NT', chapters: 13 },
+      { id: 'gal', name: 'Gálatas', testament: 'NT', chapters: 6 },
+      { id: 'eph', name: 'Efésios', testament: 'NT', chapters: 6 },
+      { id: 'php', name: 'Filipenses', testament: 'NT', chapters: 4 },
+      { id: 'col', name: 'Colossenses', testament: 'NT', chapters: 4 },
+      { id: '1th', name: '1 Tessalonicenses', testament: 'NT', chapters: 5 },
+      { id: '2th', name: '2 Tessalonicenses', testament: 'NT', chapters: 3 },
+      { id: '1ti', name: '1 Timóteo', testament: 'NT', chapters: 6 },
+      { id: '2ti', name: '2 Timóteo', testament: 'NT', chapters: 4 },
+      { id: 'tit', name: 'Tito', testament: 'NT', chapters: 3 },
+      { id: 'phm', name: 'Filemom', testament: 'NT', chapters: 1 },
+      { id: 'heb', name: 'Hebreus', testament: 'NT', chapters: 13 },
+      { id: 'jas', name: 'Tiago', testament: 'NT', chapters: 5 },
+      { id: '1pe', name: '1 Pedro', testament: 'NT', chapters: 5 },
+      { id: '2pe', name: '2 Pedro', testament: 'NT', chapters: 3 },
+      { id: '1jo', name: '1 João', testament: 'NT', chapters: 5 },
+      { id: '2jo', name: '2 João', testament: 'NT', chapters: 1 },
+      { id: '3jo', name: '3 João', testament: 'NT', chapters: 1 },
+      { id: 'jud', name: 'Judas', testament: 'NT', chapters: 1 },
+      { id: 'rev', name: 'Apocalipse', testament: 'NT', chapters: 22 }
+    ];
+
+    // Estado da Aplicação
     let devotionals = JSON.parse(localStorage.getItem('devotional_entries')) || [
       {
         id: '1',
         date: '2026-10-02',
         passage: 'João 15:1-8',
         verse: 'Eu sou a videira verdadeira, e meu Pai é o agricultor. Permaneçam em mim, e eu permanecerei em vocês.',
-        learned: 'A nossa produtividade espiritual depende exclusivamente de estarmos conectados a Jesus. Separados dEle não podemos fazer nada verdadeiramente duradouro.',
-        application: 'Separar os primeiros 20 minutos do meu dia para orar antes de verificar mensagens ou redes sociais.',
-        prayer: 'Pedir sabedoria para manter a paciência no trabalho e graça para servir à família.',
-        tags: ['Fé', 'Permanecer', 'Graça']
+        learned: 'A nossa produtividade espiritual depende exclusivamente de estarmos conectados a Jesus.',
+        application: 'Separar momentos de silêncio pela manhã para orar e meditar.',
+        prayer: 'Pedir sabedoria e paciência durante o dia.',
+        tags: ['Fé', 'Oração']
       }
     ];
 
@@ -319,56 +419,122 @@
       {
         id: '1',
         reference: 'Isaías 41:10',
-        text: 'Não tema, pois estou com você; não se pavorize, pois sou o seu Deus. Eu o fortalecerei e o ajudarei; eu o segurarei com a minha mão direita vitoriosa.',
+        text: 'Não tema, pois estou com você; não se pavorize, pois sou o seu Deus. Eu o fortalecerei e o ajudarei.',
         tag: 'Segurança'
-      },
-      {
-        id: '2',
-        reference: 'Filipenses 4:6-7',
-        text: 'Não andem ansiosos por coisa alguma, mas em tudo, pela oração e súplicas, e com ação de graças, apresentem seus pedidos a Deus.',
-        tag: 'Paz'
       }
     ];
 
+    let readBooks = JSON.parse(localStorage.getItem('devotional_read_books')) || [];
+    let currentTestament = 'OT';
     let currentFilterTag = 'all';
 
-    // App Initialization
+    // Inicialização
     window.onload = function() {
       lucide.createIcons();
       document.getElementById('field-date').value = new Date().toISOString().split('T')[0];
       renderDevotionals();
       renderVerses();
+      renderBibleTracker();
       updateStats();
     };
 
-    // Save State Helper
     function saveState() {
       localStorage.setItem('devotional_entries', JSON.stringify(devotionals));
       localStorage.setItem('devotional_verses', JSON.stringify(favoriteVerses));
+      localStorage.setItem('devotional_read_books', JSON.stringify(readBooks));
       updateStats();
     }
 
-    // Navigation Tabs Toggle
+    // Controle de Abas
     function switchTab(tab) {
-      const devTab = document.getElementById('tab-content-devotionals');
-      const verTab = document.getElementById('tab-content-verses');
-      const devNav = document.getElementById('nav-devotionals');
-      const verNav = document.getElementById('nav-verses');
+      const tabs = {
+        devotionals: document.getElementById('tab-content-devotionals'),
+        tracker: document.getElementById('tab-content-tracker'),
+        verses: document.getElementById('tab-content-verses')
+      };
+      const navs = {
+        devotionals: document.getElementById('nav-devotionals'),
+        tracker: document.getElementById('nav-tracker'),
+        verses: document.getElementById('nav-verses')
+      };
 
-      if (tab === 'devotionals') {
-        devTab.classList.remove('hidden');
-        verTab.classList.add('hidden');
-        devNav.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 text-amber-400 shadow-sm";
-        verNav.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50";
-      } else {
-        devTab.classList.add('hidden');
-        verTab.classList.remove('hidden');
-        verNav.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-slate-800 text-amber-400 shadow-sm";
-        devNav.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50";
-      }
+      Object.keys(tabs).forEach(key => {
+        if (key === tab) {
+          tabs[key].classList.remove('hidden');
+          navs[key].className = "px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all flex items-center gap-2 bg-stone-800 text-amber-400";
+        } else {
+          tabs[key].classList.add('hidden');
+          navs[key].className = "px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-stone-400 hover:text-stone-200 hover:bg-stone-800/50";
+        }
+      });
     }
 
-    // Modal Toggles
+    // Alternar Testamento
+    function switchTestament(testament) {
+      currentTestament = testament;
+      const btnOt = document.getElementById('btn-ot');
+      const btnNt = document.getElementById('btn-nt');
+
+      if (testament === 'OT') {
+        btnOt.className = "pb-2 text-sm font-medium border-b-2 border-amber-600 text-amber-400";
+        btnNt.className = "pb-2 text-sm font-medium border-b-2 border-transparent text-stone-400 hover:text-stone-200";
+      } else {
+        btnNt.className = "pb-2 text-sm font-medium border-b-2 border-amber-600 text-amber-400";
+        btnOt.className = "pb-2 text-sm font-medium border-b-2 border-transparent text-stone-400 hover:text-stone-200";
+      }
+
+      renderBibleTracker();
+    }
+
+    // Toggle de Leitura de Livro
+    function toggleBookRead(bookId) {
+      if (readBooks.includes(bookId)) {
+        readBooks = readBooks.filter(id => id !== bookId);
+      } else {
+        readBooks.push(bookId);
+      }
+      saveState();
+      renderBibleTracker();
+    }
+
+    // Renderizar Tracker Bíblico
+    function renderBibleTracker() {
+      const grid = document.getElementById('bible-books-grid');
+      const filtered = BIBLE_BOOKS.filter(b => b.testament === currentTestament);
+
+      grid.innerHTML = filtered.map(book => {
+        const isRead = readBooks.includes(book.id);
+        return `
+          <button onclick="toggleBookRead('${book.id}')" class="journal-card p-3 rounded-lg flex flex-col justify-between text-left transition-all ${isRead ? 'bg-amber-950/30 border-amber-800/60' : ''}">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold ${isRead ? 'text-amber-400' : 'text-stone-300'}">${escapeHtml(book.name)}</span>
+              <div class="w-4 h-4 rounded border ${isRead ? 'bg-amber-700 border-amber-600 text-amber-50' : 'border-stone-700'} flex items-center justify-center text-[10px]">
+                ${isRead ? '✓' : ''}
+              </div>
+            </div>
+            <span class="text-[10px] text-stone-500">${book.chapters} caps</span>
+          </button>
+        `;
+      }).join('');
+
+      // Contadores
+      const otRead = BIBLE_BOOKS.filter(b => b.testament === 'OT' && readBooks.includes(b.id)).length;
+      const ntRead = BIBLE_BOOKS.filter(b => b.testament === 'NT' && readBooks.includes(b.id)).length;
+
+      document.getElementById('ot-count').textContent = `${otRead}/39`;
+      document.getElementById('nt-count').textContent = `${ntRead}/27`;
+
+      const totalRead = readBooks.length;
+      const remaining = 66 - totalRead;
+      const pct = Math.round((totalRead / 66) * 100);
+
+      document.getElementById('tracker-summary-text').textContent = `${totalRead} de 66 (${pct}%)`;
+      document.getElementById('tracker-remaining-text').textContent = remaining === 0 ? 'Toda a Bíblia foi concluída! 🎉' : `Faltam ${remaining} livro${remaining > 1 ? 's' : ''}`;
+      document.getElementById('tracker-progress-bar').style.width = `${pct}%`;
+      document.getElementById('tracker-progress-badge').textContent = `${totalRead}/66`;
+    }
+
+    // Modais
     function toggleFormModal(show, editId = null) {
       const modal = document.getElementById('modal-form');
       const form = document.getElementById('devotional-form');
@@ -385,13 +551,13 @@
             document.getElementById('field-application').value = item.application || '';
             document.getElementById('field-prayer').value = item.prayer || '';
             document.getElementById('field-tags').value = item.tags.join(', ');
-            document.getElementById('modal-title').textContent = "Editar Registro Devocional";
+            document.getElementById('modal-title').textContent = "Editar Registro";
           }
         } else {
           form.reset();
           document.getElementById('edit-id').value = '';
           document.getElementById('field-date').value = new Date().toISOString().split('T')[0];
-          document.getElementById('modal-title').textContent = "Novo Registro Devocional";
+          document.getElementById('modal-title').textContent = "Novo Registro";
         }
         modal.classList.remove('opacity-0', 'pointer-events-none');
       } else {
@@ -408,7 +574,6 @@
       }
     }
 
-    // Handle Devotional Form Submit
     function handleFormSubmit(e) {
       e.preventDefault();
       const editId = document.getElementById('edit-id').value;
@@ -428,17 +593,11 @@
           devotionals[index] = { id: editId, date, passage, verse, learned, application, prayer, tags };
         }
       } else {
-        const newEntry = {
+        devotionals.unshift({
           id: Date.now().toString(),
-          date,
-          passage,
-          verse,
-          learned,
-          application,
-          prayer,
+          date, passage, verse, learned, application, prayer,
           tags: tags.length ? tags : ['Reflexão']
-        };
-        devotionals.unshift(newEntry);
+        });
       }
 
       saveState();
@@ -446,19 +605,13 @@
       toggleFormModal(false);
     }
 
-    // Handle Verse Form Submit
     function handleVerseSubmit(e) {
       e.preventDefault();
       const reference = document.getElementById('verse-ref').value;
       const text = document.getElementById('verse-text').value;
       const tag = document.getElementById('verse-tag').value || 'Geral';
 
-      favoriteVerses.unshift({
-        id: Date.now().toString(),
-        reference,
-        text,
-        tag
-      });
+      favoriteVerses.unshift({ id: Date.now().toString(), reference, text, tag });
 
       saveState();
       renderVerses();
@@ -466,36 +619,32 @@
       e.target.reset();
     }
 
-    // Delete Devotional
     function deleteDevotional(id) {
-      if (confirm("Tem certeza que deseja excluir este registro devocional?")) {
+      if (confirm("Deseja apagar este registro devocional?")) {
         devotionals = devotionals.filter(d => d.id !== id);
         saveState();
         renderDevotionals();
       }
     }
 
-    // Delete Verse
     function deleteVerse(id) {
       favoriteVerses = favoriteVerses.filter(v => v.id !== id);
       saveState();
       renderVerses();
     }
 
-    // Filter Tags Handler
     function setFilterTag(tag) {
       currentFilterTag = tag;
       document.querySelectorAll('.tag-filter-btn').forEach(btn => {
         if (btn.dataset.tag === tag) {
-          btn.className = "tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950 shadow-sm";
+          btn.className = "tag-filter-btn px-2.5 py-1 rounded text-xs bg-amber-800/60 text-amber-200 border border-amber-700/50";
         } else {
-          btn.className = "tag-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
+          btn.className = "tag-filter-btn px-2.5 py-1 rounded text-xs bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800";
         }
       });
       renderDevotionals();
     }
 
-    // Render Devotionals Feed
     function renderDevotionals() {
       const feed = document.getElementById('devotionals-feed');
       const searchQuery = document.getElementById('search-input').value.toLowerCase();
@@ -504,17 +653,15 @@
         const matchesTag = currentFilterTag === 'all' || item.tags.some(t => t.toLowerCase() === currentFilterTag.toLowerCase());
         const matchesSearch = item.passage.toLowerCase().includes(searchQuery) ||
                               item.learned.toLowerCase().includes(searchQuery) ||
-                              (item.verse && item.verse.toLowerCase().includes(searchQuery)) ||
-                              item.tags.some(t => t.toLowerCase().includes(searchQuery));
+                              (item.verse && item.verse.toLowerCase().includes(searchQuery));
         return matchesTag && matchesSearch;
       });
 
       if (filtered.length === 0) {
         feed.innerHTML = `
-          <div class="text-center py-12 bg-slate-900/30 rounded-2xl border border-slate-800/80">
-            <i data-lucide="book-open" class="w-12 h-12 mx-auto text-slate-600 mb-3"></i>
-            <p class="text-slate-400 font-medium">Nenhum registro devocional encontrado.</p>
-            <p class="text-xs text-slate-500 mt-1">Comece adicionando uma nova reflexão do seu dia.</p>
+          <div class="text-center py-12 journal-card rounded-xl">
+            <i data-lucide="feather" class="w-8 h-8 mx-auto text-stone-600 mb-2"></i>
+            <p class="text-stone-400 text-sm">Nenhum registro encontrado.</p>
           </div>
         `;
         lucide.createIcons();
@@ -523,77 +670,57 @@
 
       feed.innerHTML = filtered.map(item => {
         const formattedDate = new Date(item.date + 'T00:00:00').toLocaleDateString('pt-BR', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric'
+          day: '2-digit', month: 'short', year: 'numeric'
         });
 
         return `
-          <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 space-y-4 hover:border-slate-700/80 transition-all shadow-lg">
-            
-            <!-- Card Header -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-4">
+          <div class="journal-card rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between border-b border-stone-800/80 pb-3">
               <div>
-                <div class="flex items-center gap-3">
-                  <h3 class="font-serif text-xl font-bold text-amber-400">${escapeHtml(item.passage)}</h3>
-                  <span class="text-xs text-slate-400 font-medium flex items-center gap-1">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${formattedDate}
-                  </span>
-                </div>
+                <h3 class="font-serif text-lg font-semibold text-amber-400">${escapeHtml(item.passage)}</h3>
+                <span class="text-xs text-stone-500">${formattedDate}</span>
               </div>
-
-              <!-- Tags & Action Buttons -->
-              <div class="flex items-center justify-between sm:justify-end gap-3 mt-2 sm:mt-0">
-                <div class="flex gap-1.5 flex-wrap">
-                  ${item.tags.map(t => `<span class="bg-slate-800 text-slate-300 text-xs px-2.5 py-0.5 rounded-full border border-slate-700/50">${escapeHtml(t)}</span>`).join('')}
-                </div>
-                <div class="flex items-center gap-1">
-                  <button onclick="toggleFormModal(true, '${item.id}')" class="p-1.5 text-slate-400 hover:text-amber-400 rounded-lg hover:bg-slate-800 transition-colors" title="Editar">
-                    <i data-lucide="edit-2" class="w-4 h-4"></i>
-                  </button>
-                  <button onclick="deleteDevotional('${item.id}')" class="p-1.5 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-slate-800 transition-colors" title="Excluir">
-                    <i data-lucide="trash-2" class="w-4 h-4"></i>
-                  </button>
-                </div>
+              <div class="flex items-center gap-1">
+                <button onclick="toggleFormModal(true, '${item.id}')" class="p-1 text-stone-500 hover:text-stone-300">
+                  <i data-lucide="pencil" class="w-4 h-4"></i>
+                </button>
+                <button onclick="deleteDevotional('${item.id}')" class="p-1 text-stone-500 hover:text-rose-400">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
               </div>
             </div>
 
-            <!-- Highlight Verse -->
             ${item.verse ? `
-              <div class="bg-slate-950/60 border-l-2 border-amber-500 p-3.5 rounded-r-xl">
-                <p class="font-serif italic text-sm text-slate-300">"${escapeHtml(item.verse)}"</p>
+              <div class="border-l-2 border-amber-700/60 pl-3 py-1">
+                <p class="font-serif italic text-xs sm:text-sm text-stone-300">"${escapeHtml(item.verse)}"</p>
               </div>
             ` : ''}
 
-            <!-- Learnings -->
             <div class="space-y-1">
-              <h4 class="text-xs font-semibold text-amber-400 uppercase tracking-wider flex items-center gap-1">
-                <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> O que Deus falou comigo
-              </h4>
-              <p class="text-sm text-slate-200 leading-relaxed whitespace-pre-line">${escapeHtml(item.learned)}</p>
+              <span class="text-[10px] font-semibold uppercase tracking-wider text-amber-600">Reflexão</span>
+              <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">${escapeHtml(item.learned)}</p>
             </div>
 
-            <!-- Application & Prayer (Grid if both exist) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-800/50">
-              ${item.application ? `
-                <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-800/60 space-y-1">
-                  <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1">
-                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Aplicação Prática
-                  </span>
-                  <p class="text-xs text-slate-300">${escapeHtml(item.application)}</p>
-                </div>
-              ` : ''}
+            ${item.application || item.prayer ? `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs">
+                ${item.application ? `
+                  <div class="bg-parchment-950 p-2.5 rounded border border-stone-800">
+                    <span class="font-semibold text-stone-400">Aplicação:</span>
+                    <p class="text-stone-300 mt-0.5">${escapeHtml(item.application)}</p>
+                  </div>
+                ` : ''}
+                ${item.prayer ? `
+                  <div class="bg-parchment-950 p-2.5 rounded border border-stone-800">
+                    <span class="font-semibold text-stone-400">Oração:</span>
+                    <p class="text-stone-300 mt-0.5">${escapeHtml(item.prayer)}</p>
+                  </div>
+                ` : ''}
+              </div>
+            ` : ''}
 
-              ${item.prayer ? `
-                <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-800/60 space-y-1">
-                  <span class="text-xs font-semibold text-purple-400 flex items-center gap-1">
-                    <i data-lucide="heart" class="w-3.5 h-3.5"></i> Motivo de Oração
-                  </span>
-                  <p class="text-xs text-slate-300">${escapeHtml(item.prayer)}</p>
-                </div>
-              ` : ''}
+            <div class="flex gap-1.5 flex-wrap pt-1">
+              ${item.tags.map(t => `<span class="text-[10px] bg-parchment-950 text-stone-400 px-2 py-0.5 rounded border border-stone-800">${escapeHtml(t)}</span>`).join('')}
             </div>
-
           </div>
         `;
       }).join('');
@@ -601,36 +728,33 @@
       lucide.createIcons();
     }
 
-    // Render Favorite Verses
     function renderVerses() {
       const grid = document.getElementById('verses-grid');
 
       if (favoriteVerses.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full text-center py-12 bg-slate-900/30 rounded-2xl border border-slate-800">
-            <i data-lucide="bookmark" class="w-10 h-10 mx-auto text-slate-600 mb-2"></i>
-            <p class="text-slate-400 text-sm">Nenhum versículo salvo como favorito.</p>
+          <div class="col-span-full text-center py-10 journal-card rounded-xl">
+            <p class="text-stone-400 text-sm">Nenhum versículo salvo.</p>
           </div>
         `;
-        lucide.createIcons();
         return;
       }
 
       grid.innerHTML = favoriteVerses.map(v => `
-        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-slate-700 transition-all shadow-md">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="font-serif font-bold text-amber-400 text-base">${escapeHtml(v.reference)}</span>
-              <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-full border border-slate-700">${escapeHtml(v.tag)}</span>
+        <div class="journal-card rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="font-serif font-semibold text-amber-400 text-sm">${escapeHtml(v.reference)}</span>
+              <span class="text-[10px] bg-stone-800 text-stone-400 px-2 py-0.5 rounded">${escapeHtml(v.tag)}</span>
             </div>
-            <p class="font-serif italic text-sm text-slate-200 leading-relaxed">"${escapeHtml(v.text)}"</p>
+            <p class="font-serif italic text-xs sm:text-sm text-stone-300">"${escapeHtml(v.text)}"</p>
           </div>
 
-          <div class="pt-3 border-t border-slate-800/60 flex justify-between items-center text-xs">
-            <button onclick="copyVerseText('${escapeHtml(v.reference)}', '${escapeHtml(v.text)}')" class="text-slate-400 hover:text-amber-400 flex items-center gap-1">
+          <div class="pt-2 border-t border-stone-800/60 flex justify-between items-center text-xs">
+            <button onclick="copyVerseText('${escapeHtml(v.reference)}', '${escapeHtml(v.text)}')" class="text-stone-500 hover:text-stone-300 flex items-center gap-1">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
             </button>
-            <button onclick="deleteVerse('${v.id}')" class="text-slate-500 hover:text-rose-400">
+            <button onclick="deleteVerse('${v.id}')" class="text-stone-500 hover:text-rose-400">
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           </div>
@@ -640,10 +764,9 @@
       lucide.createIcons();
     }
 
-    // Update Stats Summary
     function updateStats() {
       document.getElementById('stat-total').textContent = devotionals.length;
-      document.getElementById('stat-verses').textContent = favoriteVerses.length;
+      document.getElementById('stat-books-read').textContent = `${readBooks.length} / 66`;
       document.getElementById('fav-count-badge').textContent = favoriteVerses.length;
 
       const currentMonth = new Date().getMonth();
@@ -655,20 +778,11 @@
       document.getElementById('stat-month').textContent = monthEntries.length;
     }
 
-    // Helper: Copy verse text to clipboard
     function copyVerseText(ref, text) {
-      const fullText = `"${text}" - ${ref}`;
-      const textarea = document.createElement('textarea');
-      textarea.value = fullText;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-
-      alert("Versículo copiado para a área de transferência!");
+      navigator.clipboard.writeText(`"${text}" - ${ref}`);
+      alert("Versículo copiado!");
     }
 
-    // Helper: Escape HTML strings
     function escapeHtml(str) {
       if (!str) return '';
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
